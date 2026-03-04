@@ -1,0 +1,315 @@
+# Day 21: DevOps + Cloud Design Practice
+
+## Status: ⬜ Not Started
+
+---
+
+## 📚 Practice Problems
+
+### 1. Multi-Region System Design
+
+**Requirements:**
+- Global user base (US, EU, Asia)
+- Consistent data across regions
+- Handle regional failures
+- Latency < 100ms for local users
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│  Multi-Region Architecture                                               │
+│                                                                         │
+│                         Global Traffic Manager                          │
+│                         (Route 53 / Traffic Manager)                    │
+│                    ┌──────────────┬──────────────────┐                 │
+│                    │              │                  │                 │
+│                    ▼              ▼                  ▼                 │
+│   ┌────────────────────┐ ┌────────────────────┐ ┌────────────────────┐│
+│   │    US-EAST         │ │     EU-WEST        │ │    ASIA-PACIFIC   ││
+│   │                    │ │                    │ │                    ││
+│   │ ┌──────────────┐   │ │ ┌──────────────┐   │ │ ┌──────────────┐   ││
+│   │ │     CDN      │   │ │ │     CDN      │   │ │ │     CDN      │   ││
+│   │ └──────┬───────┘   │ │ └──────┬───────┘   │ │ └──────┬───────┘   ││
+│   │        │           │ │        │           │ │        │           ││
+│   │ ┌──────▼───────┐   │ │ ┌──────▼───────┐   │ │ ┌──────▼───────┐   ││
+│   │ │     ALB      │   │ │ │     ALB      │   │ │ │     ALB      │   ││
+│   │ └──────┬───────┘   │ │ └──────┬───────┘   │ │ └──────┬───────┘   ││
+│   │        │           │ │        │           │ │        │           ││
+│   │ ┌──────▼───────┐   │ │ ┌──────▼───────┐   │ │ ┌──────▼───────┐   ││
+│   │ │  EKS Cluster │   │ │ │  EKS Cluster │   │ │ │  EKS Cluster │   ││
+│   │ └──────┬───────┘   │ │ └──────┬───────┘   │ │ └──────┬───────┘   ││
+│   │        │           │ │        │           │ │        │           ││
+│   │ ┌──────▼───────┐   │ │ ┌──────▼───────┐   │ │ ┌──────▼───────┐   ││
+│   │ │  Aurora      │   │ │ │  Aurora      │   │ │ │  Aurora      │   ││
+│   │ │  Primary     │◄──┼─┼─│  Replica     │◄──┼─┼─│  Replica     │   ││
+│   │ └──────────────┘   │ │ └──────────────┘   │ │ └──────────────┘   ││
+│   │                    │ │                    │ │                    ││
+│   │ ┌──────────────┐   │ │ ┌──────────────┐   │ │ ┌──────────────┐   ││
+│   │ │  Redis       │◄──┼─┼─│  Redis       │◄──┼─┼─│  Redis       │   ││
+│   │ │  (Local)     │   │ │ │  (Local)     │   │ │ │  (Local)     │   ││
+│   │ └──────────────┘   │ │ └──────────────┘   │ │ └──────────────┘   ││
+│   └────────────────────┘ └────────────────────┘ └────────────────────┘│
+│                                                                         │
+│   Traffic Routing:                                                     │
+│   • Latency-based: Route to nearest region                            │
+│   • Failover: Redirect on region failure                              │
+│   • Geolocation: Data residency compliance                            │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+**Key Decisions:**
+
+| Component | Strategy | Rationale |
+|-----------|----------|-----------|
+| **DNS** | Latency-based routing | Low latency for users |
+| **Database** | Aurora Global Database | Cross-region replication |
+| **Cache** | Local Redis per region | Fast reads, eventual consistency |
+| **Content** | CDN per region | Static asset delivery |
+
+---
+
+### 2. Disaster Recovery Strategy
+
+**RTO and RPO Requirements:**
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│  Recovery Objectives                                                     │
+│                                                                         │
+│  ◄─────────────── Time ──────────────────►                             │
+│                                                                         │
+│                Disaster                  Recovery                       │
+│                   │                         │                          │
+│  ─────────────────┼─────────────────────────┼─────────────────────     │
+│                   │                         │                          │
+│                   │◄───────── RTO ─────────►│                          │
+│                   │  (Recovery Time         │                          │
+│                   │   Objective)            │                          │
+│                   │  Time to restore        │                          │
+│                   │                         │                          │
+│  ◄──── RPO ──────►│                                                    │
+│  (Recovery Point  │                                                    │
+│   Objective)      │                                                    │
+│  Max data loss    │                                                    │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+DR Strategy Options:
+
+┌─────────────┬──────────┬──────────┬──────────┬───────────────────────┐
+│ Strategy    │ RTO      │ RPO      │ Cost     │ Description           │
+├─────────────┼──────────┼──────────┼──────────┼───────────────────────┤
+│ Backup &    │ Hours    │ Hours    │ $        │ Restore from backups  │
+│ Restore     │          │          │          │                       │
+├─────────────┼──────────┼──────────┼──────────┼───────────────────────┤
+│ Pilot Light │ Minutes  │ Minutes  │ $$       │ Minimal always-on     │
+│             │          │          │          │ infrastructure        │
+├─────────────┼──────────┼──────────┼──────────┼───────────────────────┤
+│ Warm        │ Minutes  │ Seconds  │ $$$      │ Scaled-down replica   │
+│ Standby     │          │          │          │                       │
+├─────────────┼──────────┼──────────┼──────────┼───────────────────────┤
+│ Active-     │ Seconds  │ Zero     │ $$$$     │ Full parallel         │
+│ Active      │          │          │          │ infrastructure        │
+└─────────────┴──────────┴──────────┴──────────┴───────────────────────┘
+```
+
+**DR Architecture:**
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│  Warm Standby DR                                                         │
+│                                                                         │
+│   PRIMARY (us-east-1)              STANDBY (us-west-2)                 │
+│  ┌────────────────────────┐       ┌────────────────────────┐           │
+│  │                        │       │                        │           │
+│  │  ┌──────────────────┐  │       │  ┌──────────────────┐  │           │
+│  │  │ Full Capacity    │  │       │  │ Reduced Capacity │  │           │
+│  │  │ EKS (10 nodes)   │  │       │  │ EKS (2 nodes)    │  │           │
+│  │  └──────────────────┘  │       │  └──────────────────┘  │           │
+│  │                        │       │                        │           │
+│  │  ┌──────────────────┐  │       │  ┌──────────────────┐  │           │
+│  │  │ RDS Primary      │──┼───────┼─►│ RDS Replica      │  │           │
+│  │  │                  │  │ Async │  │ (Read-only)      │  │           │
+│  │  └──────────────────┘  │ Repl. │  └──────────────────┘  │           │
+│  │                        │       │                        │           │
+│  │  ┌──────────────────┐  │       │  ┌──────────────────┐  │           │
+│  │  │ S3 Bucket        │──┼───────┼─►│ S3 Replica       │  │           │
+│  │  │                  │  │ CRR   │  │                  │  │           │
+│  │  └──────────────────┘  │       │  └──────────────────┘  │           │
+│  │                        │       │                        │           │
+│  └────────────────────────┘       └────────────────────────┘           │
+│           │                                  │                          │
+│           │          Route 53                │                          │
+│           │     ┌──────────────────┐        │                          │
+│           └─────┤ Health Check     ├────────┘                          │
+│                 │ Failover Policy  │                                   │
+│                 └──────────────────┘                                   │
+│                                                                         │
+│  Failover Process:                                                     │
+│  1. Health check detects failure                                       │
+│  2. Route 53 updates DNS to standby                                    │
+│  3. Promote RDS replica to primary                                     │
+│  4. Scale up EKS to full capacity                                      │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### 3. 99.99% Availability Architecture
+
+**Target: 99.99% = 52.56 minutes downtime/year**
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│  High Availability Architecture                                          │
+│                                                                         │
+│         ┌───────────────────────────────────────────────────────────┐  │
+│         │                        Global                              │  │
+│         │                  ┌──────────────┐                         │  │
+│         │                  │   Route 53   │                         │  │
+│         │                  │   (100% SLA) │                         │  │
+│         │                  └──────┬───────┘                         │  │
+│         │                         │                                  │  │
+│         │         ┌───────────────┼───────────────┐                 │  │
+│         │         │               │               │                 │  │
+│         │         ▼               ▼               ▼                 │  │
+│         │  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐      │  │
+│         │  │  CloudFront  │ │  CloudFront  │ │  CloudFront  │      │  │
+│         │  │ (Edge POP 1) │ │ (Edge POP 2) │ │ (Edge POP 3) │      │  │
+│         │  └──────────────┘ └──────────────┘ └──────────────┘      │  │
+│         └───────────────────────────────────────────────────────────┘  │
+│                                     │                                   │
+│         ┌───────────────────────────┼───────────────────────────────┐  │
+│         │      Region: us-east-1    │                               │  │
+│         │                           │                               │  │
+│         │                   ┌───────▼───────┐                       │  │
+│         │                   │     ALB       │                       │  │
+│         │                   │ (Multi-AZ)    │                       │  │
+│         │                   └───────┬───────┘                       │  │
+│         │                           │                               │  │
+│         │     ┌─────────────────────┼─────────────────────┐        │  │
+│         │     │                     │                     │        │  │
+│         │     ▼                     ▼                     ▼        │  │
+│         │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐   │  │
+│         │  │   AZ-1a     │    │   AZ-1b     │    │   AZ-1c     │   │  │
+│         │  │             │    │             │    │             │   │  │
+│         │  │ ┌─────────┐ │    │ ┌─────────┐ │    │ ┌─────────┐ │   │  │
+│         │  │ │ EKS     │ │    │ │ EKS     │ │    │ │ EKS     │ │   │  │
+│         │  │ │ Nodes   │ │    │ │ Nodes   │ │    │ │ Nodes   │ │   │  │
+│         │  │ └─────────┘ │    │ └─────────┘ │    │ └─────────┘ │   │  │
+│         │  │             │    │             │    │             │   │  │
+│         │  │ ┌─────────┐ │    │ ┌─────────┐ │    │ ┌─────────┐ │   │  │
+│         │  │ │ ElastiC │ │    │ │ ElastiC │ │    │ │ ElastiC │ │   │  │
+│         │  │ │ ache    │ │    │ │ ache    │ │    │ │ ache    │ │   │  │
+│         │  │ └─────────┘ │    │ └─────────┘ │    │ └─────────┘ │   │  │
+│         │  └─────────────┘    └─────────────┘    └─────────────┘   │  │
+│         │                            │                              │  │
+│         │                   ┌────────▼─────────┐                   │  │
+│         │                   │  Aurora          │                   │  │
+│         │                   │  Multi-AZ        │                   │  │
+│         │                   │  ┌─────┐ ┌─────┐ │                   │  │
+│         │                   │  │ Pri │ │ Rep │ │                   │  │
+│         │                   │  └─────┘ └─────┘ │                   │  │
+│         │                   └──────────────────┘                   │  │
+│         │                                                          │  │
+│         └──────────────────────────────────────────────────────────┘  │
+│                                                                         │
+│  Availability Calculation:                                             │
+│  ALB (99.99%) × EKS (99.95%) × Aurora (99.99%) × ElastiCache (99.9%)  │
+│  = 99.83% (single AZ)                                                  │
+│                                                                         │
+│  With 3 AZs: 1 - (1-0.9983)³ = 99.999985% ≈ 99.99%+ ✓                │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+**HA Checklist:**
+
+- [ ] Multiple availability zones
+- [ ] Auto-scaling configured
+- [ ] Health checks enabled
+- [ ] Circuit breakers implemented
+- [ ] Graceful degradation
+- [ ] Automated failover
+- [ ] Regular chaos testing
+- [ ] DR runbooks documented
+
+---
+
+## 🎯 Design Exercise Template
+
+```markdown
+## System: [Name]
+
+### 1. Requirements
+**Functional:**
+- [ ] Requirement 1
+- [ ] Requirement 2
+
+**Non-Functional:**
+- Availability: 99.99%
+- RTO: 15 minutes
+- RPO: 1 minute
+- Latency: < 100ms (p99)
+
+### 2. Architecture Diagram
+[Draw diagram]
+
+### 3. Component Decisions
+
+| Component | Choice | Rationale |
+|-----------|--------|-----------|
+| Compute | | |
+| Database | | |
+| Cache | | |
+| CDN | | |
+
+### 4. Resilience Patterns
+- Circuit breaker: [Location]
+- Retry: [Configuration]
+- Timeout: [Values]
+- Bulkhead: [Implementation]
+
+### 5. Disaster Recovery
+- Strategy: [Pilot Light/Warm Standby/Active-Active]
+- RTO: [Time]
+- RPO: [Time]
+- Failover process: [Steps]
+
+### 6. Cost Estimation
+| Resource | Quantity | Monthly Cost |
+|----------|----------|--------------|
+| | | |
+| **Total** | | |
+```
+
+---
+
+## 📝 Notes
+
+*Add your notes here during practice*
+
+---
+
+## 📖 Resources
+
+- [ ] [AWS Disaster Recovery Whitepaper](https://aws.amazon.com/blogs/architecture/disaster-recovery-dr-architecture-on-aws-part-i-strategies-for-recovery-in-the-cloud/)
+- [ ] [Multi-Region Architecture](https://docs.aws.amazon.com/whitepapers/latest/aws-multi-region-fundamentals/introduction.html)
+- [ ] [SLA Calculator](https://uptime.is/)
+
+---
+
+## ✅ Week 3 Summary
+
+After completing Week 3, you should be able to:
+
+- [ ] Design cloud-native architectures
+- [ ] Implement containerization with Docker/K8s
+- [ ] Set up CI/CD pipelines
+- [ ] Write Infrastructure as Code
+- [ ] Design secure systems
+- [ ] Implement observability
+- [ ] Design for high availability and DR
+
+**Date Completed:** _____________

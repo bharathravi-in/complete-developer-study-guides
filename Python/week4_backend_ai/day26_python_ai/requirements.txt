@@ -1,0 +1,8 @@
+# Day 26 - Python for AI Dependencies
+numpy>=1.26.0
+pandas>=2.1.0
+openai>=1.6.0
+langchain>=0.1.0
+langchain-openai>=0.0.5
+python-dotenv>=1.0.0
+tiktoken>=0.5.0
