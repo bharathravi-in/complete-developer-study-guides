@@ -50,52 +50,55 @@
 
 ## Complete File Index (37 files)
 
+[← Back to Main](../README.md)
+
 ### Week 1 — Python + Flask
-- `week1-python-flask/python-fundamentals/01-syntax-and-data-structures.md`
-- `week1-python-flask/python-fundamentals/02-oop-and-classes.md`
-- `week1-python-flask/python-fundamentals/03-async-and-concurrency.md`
-- `week1-python-flask/python-fundamentals/04-file-handling-and-logging.md`
-- `week1-python-flask/python-fundamentals/05-testing-with-pytest.md`
-- `week1-python-flask/python-fundamentals/06-decorators-and-advanced.md`
-- `week1-python-flask/python-fundamentals/07-advanced-patterns-and-performance.md` ✨ NEW
-- `week1-python-flask/flask-api/01-flask-complete-guide.md`
-- `week1-python-flask/flask-api/02-advanced-flask-patterns.md` ✨ NEW
-- `week1-python-flask/exercises/01-python-exercises-with-solutions.py` ✨ NEW
-- `week1-python-flask/projects/doc_processor.py` ✨ NEW (runnable CLI tool)
-- `week1-python-flask/projects/mini-cli-tool-guide.md`
+- [01 — Syntax & Data Structures](week1-python-flask/python-fundamentals/01-syntax-and-data-structures.md)
+- [02 — OOP & Classes](week1-python-flask/python-fundamentals/02-oop-and-classes.md)
+- [03 — Async & Concurrency](week1-python-flask/python-fundamentals/03-async-and-concurrency.md)
+- [04 — File Handling & Logging](week1-python-flask/python-fundamentals/04-file-handling-and-logging.md)
+- [05 — Testing with Pytest](week1-python-flask/python-fundamentals/05-testing-with-pytest.md)
+- [06 — Decorators & Advanced](week1-python-flask/python-fundamentals/06-decorators-and-advanced.md)
+- [07 — Advanced Patterns & Performance](week1-python-flask/python-fundamentals/07-advanced-patterns-and-performance.md)
+- [Flask Complete Guide](week1-python-flask/flask-api/01-flask-complete-guide.md)
+- [Advanced Flask Patterns](week1-python-flask/flask-api/02-advanced-flask-patterns.md)
+- [Mini CLI Tool Guide](week1-python-flask/projects/mini-cli-tool-guide.md)
 
 ### Week 2 — AI Foundations
-- `week2-ai-foundations/llm-basics/01-llm-fundamentals.md`
-- `week2-ai-foundations/llm-basics/02-advanced-ai-patterns.md` ✨ NEW
-- `week2-ai-foundations/embeddings/01-embeddings-complete-guide.md`
-- `week2-ai-foundations/embeddings-vectors/02-advanced-embeddings-and-retrieval.md` ✨ NEW
-- `week2-ai-foundations/qdrant/01-qdrant-complete-guide.md`
-- `week2-ai-foundations/rag/01-rag-complete-guide.md`
-- `week2-ai-foundations/projects/rag_pipeline_demo.py` ✨ NEW (runnable RAG demo)
+- [LLM Fundamentals](week2-ai-foundations/llm-basics/01-llm-fundamentals.md)
+- [Advanced AI Patterns](week2-ai-foundations/llm-basics/02-advanced-ai-patterns.md)
+- [Embeddings Complete Guide](week2-ai-foundations/embeddings/01-embeddings-complete-guide.md)
+- [Advanced Embeddings & Retrieval](week2-ai-foundations/embeddings-vectors/02-advanced-embeddings-and-retrieval.md)
+- [Qdrant Complete Guide](week2-ai-foundations/qdrant/01-qdrant-complete-guide.md)
+- [RAG Complete Guide](week2-ai-foundations/rag/01-rag-complete-guide.md)
 
 ### Week 3 — Production Stack
-- `week3-production-stack/redis/01-redis-complete-guide.md`
-- `week3-production-stack/redis/02-advanced-redis-patterns.md` ✨ NEW
-- `week3-production-stack/docker/01-docker-complete-guide.md`
-- `week3-production-stack/docker/02-advanced-docker-kubernetes.md` ✨ NEW
-- `week3-production-stack/flutter/01-flutter-ai-chat-app.md`
-- `week3-production-stack/system-design/02-advanced-system-design.md` ✨ NEW
-- `week3-production-stack/architecture/01-production-architecture-patterns.md` ✨ NEW
+- [Production Architecture Patterns](week3-production-stack/architecture/01-production-architecture-patterns.md)
+- [Docker Complete Guide](week3-production-stack/docker/01-docker-complete-guide.md)
+- [Advanced Docker & Kubernetes](week3-production-stack/docker/02-advanced-docker-kubernetes.md)
+- [Flutter AI Chat App](week3-production-stack/flutter/01-flutter-ai-chat-app.md)
+- [Redis Complete Guide](week3-production-stack/redis/01-redis-complete-guide.md)
+- [Advanced Redis Patterns](week3-production-stack/redis/02-advanced-redis-patterns.md)
+- [Advanced System Design](week3-production-stack/system-design/02-advanced-system-design.md)
 
 ### Week 4 — Interview Prep
-- `week4-interview-prep/system-design/01-ai-system-design.md`
-- `week4-interview-prep/interview-questions/01-120-interview-questions.md`
-- `week4-interview-prep/full-project/project-blueprint.md`
-- `week4-interview-prep/mock-interviews/01-mock-interview-scripts.md` ✨ NEW
+- [120 Interview Questions](week4-interview-prep/interview-questions/01-120-interview-questions.md)
+- [Behavioral Interview Guide](week4-interview-prep/behavioral-interviews/01-behavioral-interview-guide.md)
+- [Mock Interview Scripts](week4-interview-prep/mock-interviews/01-mock-interview-scripts.md)
+- [AI System Design](week4-interview-prep/system-design/01-ai-system-design.md)
+- [Testing AI Systems](week4-interview-prep/testing-ai-applications/01-testing-ai-systems.md)
+- [Project Blueprint](week4-interview-prep/full-project/project-blueprint.md)
+- [Job Search & Networking](week4-interview-prep/job-search-strategy/01-job-search-and-networking.md)
+- [Salary Negotiation Guide](week4-interview-prep/job-search-strategy/02-salary-negotiation-guide.md)
 
 ### Resources
-- `resources/daily-plan/30-day-timetable.md`
-- `resources/resume/resume-template.md`
-- `resources/cheat-sheets/python-cheatsheet.md`
-- `resources/cheat-sheets/flask-cheatsheet.md`
-- `resources/cheat-sheets/redis-cheatsheet.md`
-- `resources/cheat-sheets/docker-cheatsheet.md`
-- `resources/cheat-sheets/qdrant-rag-cheatsheet.md`
+- [30-Day Timetable](resources/daily-plan/30-day-timetable.md)
+- [Resume Template](resources/resume/resume-template.md)
+- [Python Cheatsheet](resources/cheat-sheets/python-cheatsheet.md)
+- [Flask Cheatsheet](resources/cheat-sheets/flask-cheatsheet.md)
+- [Redis Cheatsheet](resources/cheat-sheets/redis-cheatsheet.md)
+- [Docker Cheatsheet](resources/cheat-sheets/docker-cheatsheet.md)
+- [Qdrant & RAG Cheatsheet](resources/cheat-sheets/qdrant-rag-cheatsheet.md)
 
 ---
 

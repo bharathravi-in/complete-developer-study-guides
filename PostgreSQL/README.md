@@ -13,18 +13,54 @@ A comprehensive learning path to becoming a PostgreSQL expert, covering foundati
 | 3 | DBA + Production + Scaling | Days 15-21 |
 | 4 | Advanced PostgreSQL (Senior/AI/System Design) | Days 22-30 |
 
+## 📁 File Navigation
+
+[← Back to Main](../README.md)
+
 ## 📁 Directory Structure
 
-```
-PostgreSQL/
-├── README.md                    # This file
-├── Week-1-Foundations/          # SQL basics & architecture
-├── Week-2-Performance/          # Transactions, indexing, optimization
-├── Week-3-DBA-Production/       # Replication, backup, HA, security
-├── Week-4-Advanced/             # JSONB, FTS, extensions, system design
-├── Interview-Prep/              # Interview questions & case studies
-└── Practice-SQL/                # SQL exercises & solutions
-```
+**Week 1 — Foundations**
+- [Day 01 — Architecture](Week-1-Foundations/Day-01-Architecture.md)
+- [Day 02 — Database Schema](Week-1-Foundations/Day-02-Database-Schema.md)
+- [Day 03 — Data Types](Week-1-Foundations/Day-03-Data-Types.md)
+- [Day 04 — DDL Commands](Week-1-Foundations/Day-04-DDL-Commands.md)
+- [Day 05 — DML & Querying](Week-1-Foundations/Day-05-DML-Querying.md)
+- [Day 06 — Joins & Advanced Querying](Week-1-Foundations/Day-06-Joins-Advanced-Querying.md)
+- [Day 07 — Window Functions](Week-1-Foundations/Day-07-Window-Functions.md)
+
+**Week 2 — Performance**
+- [Day 08 — ACID & Transactions](Week-2-Performance/Day-08-ACID-Transactions.md)
+- [Day 09 — Locks & Concurrency](Week-2-Performance/Day-09-Locks-Concurrency.md)
+- [Day 10 — Indexing Deep Dive](Week-2-Performance/Day-10-Indexing-Deep-Dive.md)
+- [Day 11 — Query Planner & EXPLAIN](Week-2-Performance/Day-11-Query-Planner-EXPLAIN.md)
+- [Day 12 — Performance Optimization](Week-2-Performance/Day-12-Performance-Optimization.md)
+- [Day 13 — VACUUM & Autovacuum](Week-2-Performance/Day-13-VACUUM-Autovacuum.md)
+- [Day 14 — Configuration Tuning](Week-2-Performance/Day-14-Configuration-Tuning.md)
+
+**Week 3 — DBA & Production**
+- [Day 15 — WAL & Replication](Week-3-DBA-Production/Day-15-WAL-Replication.md)
+- [Day 16 — Backup & Recovery](Week-3-DBA-Production/Day-16-Backup-Recovery.md)
+- [Day 17 — High Availability](Week-3-DBA-Production/Day-17-High-Availability.md)
+- [Day 18 — Security](Week-3-DBA-Production/Day-18-Security.md)
+- [Day 19 — Partitioning](Week-3-DBA-Production/Day-19-Partitioning.md)
+- [Day 20 — Monitoring](Week-3-DBA-Production/Day-20-Monitoring.md)
+- [Day 21 — Connection Pooling](Week-3-DBA-Production/Day-21-Connection-Pooling.md)
+
+**Week 4 — Advanced**
+- [Day 22 — JSONB](Week-4-Advanced/Day-22-JSONB.md)
+- [Day 23 — Full-Text Search](Week-4-Advanced/Day-23-Full-Text-Search.md)
+- [Day 24 — PL/pgSQL](Week-4-Advanced/Day-24-PLpgSQL.md)
+- [Day 25 — CTEs & Recursive](Week-4-Advanced/Day-25-CTEs-Recursive.md)
+- [Day 26 — Extensions](Week-4-Advanced/Day-26-Extensions.md)
+- [Day 27 — Scaling](Week-4-Advanced/Day-27-Scaling.md)
+- [Day 28 — System Design](Week-4-Advanced/Day-28-System-Design.md)
+- [Day 29 — pgvector & AI](Week-4-Advanced/Day-29-pgvector-AI.md)
+- [Day 30 — Mock Interview](Week-4-Advanced/Day-30-Mock-Interview.md)
+
+**Interview Prep**
+- [Beginner Questions](Interview-Prep/01-Beginner-Questions.md)
+- [Intermediate Questions](Interview-Prep/02-Intermediate-Questions.md)
+- [Advanced Questions](Interview-Prep/03-Advanced-Questions.md)
 
 ## 📅 WEEK 1 – Foundations + SQL Mastery
 

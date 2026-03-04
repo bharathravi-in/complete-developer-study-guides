@@ -1,5 +1,7 @@
 # Angular 22 – Complete 30-Day Interview Preparation Guide
 
+[← Back to Main](../README.md)
+
 **Author:** Bharath Kumar  
 **Experience Target:** Beginner → Advanced → Architecture Level  
 **Duration:** 30 Days Structured Plan

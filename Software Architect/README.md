@@ -15,56 +15,36 @@
 
 ---
 
-## 📁 Folder Structure
+## 📁 File Navigation
 
-```
-Software Architect/
-├── README.md                          # This file
-├── Week-1-Foundations/
-│   ├── Day-01-What-Is-Software-Architecture.md
-│   ├── Day-02-Architecture-Styles.md
-│   ├── Day-03-Design-Principles.md
-│   ├── Day-04-Design-Patterns.md
-│   ├── Day-05-Architectural-Patterns.md
-│   ├── Day-06-Requirements-Engineering.md
-│   └── Day-07-Architecture-Documentation.md
-├── Week-2-System-Design/
-│   ├── Day-08-Scalability-Basics.md
-│   ├── Day-09-System-Design-Core.md
-│   ├── Day-10-Database-Architecture.md
-│   ├── Day-11-Caching-Performance.md
-│   ├── Day-12-Messaging-Systems.md
-│   ├── Day-13-High-Availability.md
-│   └── Day-14-System-Design-Practice.md
-├── Week-3-Cloud-DevOps-Security/
-│   ├── Day-15-Cloud-Architecture.md
-│   ├── Day-16-Containers-Orchestration.md
-│   ├── Day-17-DevOps-CICD.md
-│   ├── Day-18-Infrastructure-as-Code.md
-│   ├── Day-19-Security-Architecture.md
-│   ├── Day-20-Observability.md
-│   └── Day-21-Cloud-Design-Practice.md
-├── Week-4-Enterprise-Leadership/
-│   ├── Day-22-Enterprise-Architecture.md
-│   ├── Day-23-API-Integration.md
-│   ├── Day-24-AI-Modern-Architect.md
-│   ├── Day-25-Frontend-Architecture.md
-│   ├── Day-26-Platform-Engineering.md
-│   ├── Day-27-Leadership-Governance.md
-│   ├── Day-28-Large-System-Practice.md
-│   ├── Day-29-Mock-Interviews.md
-│   └── Day-30-Final-Review-Portfolio.md
-├── Interview-Prep/
-│   ├── Beginner-Questions.md
-│   ├── Intermediate-Questions.md
-│   ├── Advanced-Questions.md
-│   └── Whiteboard-Template.md
-├── Resources/
-│   ├── Books-Courses.md
-│   └── Tools-Technologies.md
-└── Practice-Projects/
-    └── README.md
-```
+[← Back to Main](../README.md)
+
+**Week 1 — Foundations**
+- [Day 01 — What Is Software Architecture](Week-1-Foundations/Day-01-What-Is-Software-Architecture.md)
+- [Day 02 — Architecture Styles](Week-1-Foundations/Day-02-Architecture-Styles.md)
+- [Day 03 — Design Principles](Week-1-Foundations/Day-03-Design-Principles.md)
+- [Day 04 — Design Patterns](Week-1-Foundations/Day-04-Design-Patterns.md)
+- [Day 05 — Architectural Patterns](Week-1-Foundations/Day-05-Architectural-Patterns.md)
+- [Day 06 — Requirements Engineering](Week-1-Foundations/Day-06-Requirements-Engineering.md)
+- [Day 07 — Architecture Documentation](Week-1-Foundations/Day-07-Architecture-Documentation.md)
+
+**Week 2 — System Design**
+- [Day 08 — Scalability Basics](Week-2-System-Design/Day-08-Scalability-Basics.md)
+- [Day 09 — System Design Core](Week-2-System-Design/Day-09-System-Design-Core.md)
+- [Day 10 — Database Architecture](Week-2-System-Design/Day-10-Database-Architecture.md)
+- [Day 11 — Caching & Performance](Week-2-System-Design/Day-11-Caching-Performance.md)
+- [Day 12 — Messaging Systems](Week-2-System-Design/Day-12-Messaging-Systems.md)
+- [Day 13 — High Availability](Week-2-System-Design/Day-13-High-Availability.md)
+- [Day 14 — System Design Practice](Week-2-System-Design/Day-14-System-Design-Practice.md)
+
+**Week 3 — Cloud, DevOps & Security**
+- [Day 15 — Cloud Architecture](Week-3-Cloud-DevOps-Security/Day-15-Cloud-Architecture.md)
+- [Day 16 — Containers & Orchestration](Week-3-Cloud-DevOps-Security/Day-16-Containers-Orchestration.md)
+- [Day 17 — DevOps & CI/CD](Week-3-Cloud-DevOps-Security/Day-17-DevOps-CICD.md)
+- [Day 18 — Infrastructure as Code](Week-3-Cloud-DevOps-Security/Day-18-Infrastructure-as-Code.md)
+- [Day 19 — Security Architecture](Week-3-Cloud-DevOps-Security/Day-19-Security-Architecture.md)
+- [Day 20 — Observability](Week-3-Cloud-DevOps-Security/Day-20-Observability.md)
+- [Day 21 — Cloud Design Practice](Week-3-Cloud-DevOps-Security/Day-21-Cloud-Design-Practice.md)
 
 ---
 

@@ -4,33 +4,22 @@ Complete guide to become a Flutter expert in 30 days with practical examples and
 
 ## 📚 Course Structure
 
+[← Back to Main](../README.md)
+
 ### 🗓 Week 1 - Foundations (Days 1-7)
-- **Day 1-2**: Setup & Dart Basics
-- **Day 3-4**: Flutter Architecture Basics
-- **Day 5-6**: Layout System
-- **Day 7**: Navigation
+- [Day 1-2 — Dart Basics](week-1/day-1-2-dart-basics.md)
+- [Day 3-4 — Architecture](week-1/day-3-4-architecture.md)
+- [Day 5-6 — Layouts](week-1/day-5-6-layouts.md)
+- [Day 7 — Navigation](week-1/day-7-navigation.md)
 
 ### 🗓 Week 2 - Intermediate Level (Days 8-14)
-- **Day 8-9**: State Management Basics
-- **Day 10-11**: Forms & Validation
-- **Day 12-13**: Networking
-- **Day 14**: Local Storage
+- [Day 8-9 — State Management](week-2/day-8-9-state-management.md)
 
 ### 🗓 Week 3 - Advanced Concepts (Days 15-21)
-- **Day 15-16**: Advanced State Management
-- **Day 17-18**: Clean Architecture
-- **Day 19**: Animations
-- **Day 20**: Performance Optimization
-- **Day 21**: Platform Integration
+- [Week 3 Overview](week-3/README.md)
 
 ### 🗓 Week 4 - Production-Level Skills (Days 22-30)
-- **Day 22**: Testing
-- **Day 23**: CI/CD
-- **Day 24**: Firebase
-- **Day 25**: Security
-- **Day 26-27**: Advanced Dart
-- **Day 28-29**: Build Production App
-- **Day 30**: Interview Revision
+- [Week 4 Overview](week-4/README.md)
 
 ## 🎯 Learning Goals
 
@@ -60,6 +49,9 @@ Navigate to Week 1 folder and start with Day 1!
 - [Week 3 - Advanced](./week-3/README.md)
 - [Week 4 - Production](./week-4/README.md)
 - [Interview Questions](./interview-questions.md)
+- [Study Guide](./STUDY-GUIDE.md)
+- [Quick Reference](./quick-reference.md)
+- [Progress Tracker](./PROGRESS-TRACKER.md)
 
 ---
 

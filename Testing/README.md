@@ -19,54 +19,34 @@
 
 ---
 
-## 📁 Folder Structure
+## 📁 File Navigation
 
-```
-Testing/
-├── README.md
-├── Week-1-Unit-Testing/
-│   ├── Day-01-Testing-Fundamentals.md
-│   ├── Day-02-Jest-Deep-Dive.md
-│   ├── Day-03-Jasmine-Karma.md
-│   ├── Day-04-Pytest-Fundamentals.md
-│   ├── Day-05-Mocking-Stubbing.md
-│   ├── Day-06-TDD-BDD-Patterns.md
-│   └── Day-07-Code-Coverage.md
-├── Week-2-Integration-Testing/
-│   ├── Day-08-Angular-Testing.md
-│   ├── Day-09-React-Testing-Library.md
-│   ├── Day-10-Node-API-Testing.md
-│   ├── Day-11-Database-Testing.md
-│   ├── Day-12-Service-Testing.md
-│   ├── Day-13-Snapshot-Visual-Testing.md
-│   └── Day-14-CI-Test-Automation.md
-├── Week-3-E2E-Testing/
-│   ├── Day-15-E2E-Fundamentals.md
-│   ├── Day-16-Cypress-Deep-Dive.md
-│   ├── Day-17-Playwright-Deep-Dive.md
-│   ├── Day-18-Selenium-WebDriver.md
-│   ├── Day-19-Page-Object-Model.md
-│   ├── Day-20-API-Contract-Testing.md
-│   └── Day-21-Mobile-Testing.md
-├── Week-4-Performance-Advanced/
-│   ├── Day-22-Performance-Testing-Basics.md
-│   ├── Day-23-Load-Stress-Testing.md
-│   ├── Day-24-Lighthouse-Web-Vitals.md
-│   ├── Day-25-Security-Testing.md
-│   ├── Day-26-Chaos-Engineering.md
-│   ├── Day-27-Test-Architecture.md
-│   ├── Day-28-Testing-Microservices.md
-│   ├── Day-29-Interview-QA.md
-│   └── Day-30-Mock-Interview.md
-├── Cheatsheets/
-│   ├── Jest-Cheatsheet.md
-│   ├── Cypress-Cheatsheet.md
-│   ├── Playwright-Cheatsheet.md
-│   └── Pytest-Cheatsheet.md
-└── Interview-Prep/
-    ├── Testing-Interview-Questions.md
-    └── Testing-Best-Practices.md
-```
+[← Back to Main](../README.md)
+
+**Week 1 — Unit Testing**
+- [Day 01 — Testing Fundamentals](Week-1-Unit-Testing/Day-01-Testing-Fundamentals.md)
+- [Day 02 — Jest Deep Dive](Week-1-Unit-Testing/Day-02-Jest-Deep-Dive.md)
+- [Day 03 — Jasmine & Karma](Week-1-Unit-Testing/Day-03-Jasmine-Karma.md)
+- [Day 04 — Pytest Fundamentals](Week-1-Unit-Testing/Day-04-Pytest-Fundamentals.md)
+- [Day 05 — Mocking & Stubbing](Week-1-Unit-Testing/Day-05-Mocking-Stubbing.md)
+- [Day 06 — TDD & BDD Patterns](Week-1-Unit-Testing/Day-06-TDD-BDD-Patterns.md)
+- [Day 07 — Code Coverage](Week-1-Unit-Testing/Day-07-Code-Coverage.md)
+
+**Week 2 — Integration Testing**
+- [Day 08 — Angular Testing](Week-2-Integration-Testing/Day-08-Angular-Testing.md)
+- [Day 09 — React Testing Library](Week-2-Integration-Testing/Day-09-React-Testing-Library.md)
+- [Day 10 — Node API Testing](Week-2-Integration-Testing/Day-10-Node-API-Testing.md)
+
+**Week 3 — E2E Testing**
+- [Day 16 — Cypress Deep Dive](Week-3-E2E-Testing/Day-16-Cypress-Deep-Dive.md)
+- [Day 17 — Playwright Deep Dive](Week-3-E2E-Testing/Day-17-Playwright-Deep-Dive.md)
+
+**Week 4 — Performance & Advanced**
+- [Day 22 — Performance Testing](Week-4-Performance-Advanced/Day-22-Performance-Testing.md)
+
+**Interview & Reference**
+- [Testing Interview Questions](Interview-Prep/Testing-Interview-Questions.md)
+- [Testing Frameworks Cheatsheet](Cheatsheets/Testing-Frameworks-Cheatsheet.md)
 
 ---
 
@@ -114,6 +94,5 @@ Testing/
 | Resource | Link |
 |----------|------|
 | Day 1: Fundamentals | [Start Here](Week-1-Unit-Testing/Day-01-Testing-Fundamentals.md) |
-| Jest Cheatsheet | [Quick Reference](Cheatsheets/Jest-Cheatsheet.md) |
-| Cypress Cheatsheet | [Quick Reference](Cheatsheets/Cypress-Cheatsheet.md) |
 | Interview Q&A | [Prepare](Interview-Prep/Testing-Interview-Questions.md) |
+| Testing Cheatsheet | [Quick Reference](Cheatsheets/Testing-Frameworks-Cheatsheet.md) |

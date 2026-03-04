@@ -11,50 +11,28 @@
 | **Week 3** | Runtime, Decorators & Tooling | Days 15–21 |
 | **Week 4** | Architecture, Migration & Interview Prep | Days 22–30 |
 
-## 📁 Folder Structure
+## 📁 File Navigation
 
-```
-TypeScript/
-├── README.md
-├── Week-1-Type-System/
-│   ├── Day-01-TypeScript-Fundamentals.md
-│   ├── Day-02-Interfaces-vs-Types.md
-│   ├── Day-03-Generics-Deep-Dive.md
-│   ├── Day-04-Generic-Constraints-Patterns.md
-│   ├── Day-05-Utility-Types.md
-│   ├── Day-06-Mapped-Types.md
-│   └── Day-07-Conditional-Types.md
-├── Week-2-Advanced-Types/
-│   ├── Day-08-Template-Literal-Types.md
-│   ├── Day-09-Type-Guards-Narrowing.md
-│   ├── Day-10-Discriminated-Unions.md
-│   ├── Day-11-Infer-Keyword.md
-│   ├── Day-12-Variance-Covariance.md
-│   ├── Day-13-Module-System.md
-│   └── Day-14-Declaration-Files.md
-├── Week-3-Runtime-Tooling/
-│   ├── Day-15-Decorators-v5.md
-│   ├── Day-16-Metadata-Reflection.md
-│   ├── Day-17-Compiler-API.md
-│   ├── Day-18-Project-References.md
-│   ├── Day-19-ESLint-TypeScript.md
-│   ├── Day-20-Testing-TypeScript.md
-│   └── Day-21-Performance-Optimization.md
-├── Week-4-Architecture-Interview/
-│   ├── Day-22-Design-Patterns-TS.md
-│   ├── Day-23-React-TypeScript.md
-│   ├── Day-24-Angular-TypeScript.md
-│   ├── Day-25-Node-TypeScript.md
-│   ├── Day-26-Migration-Strategies.md
-│   ├── Day-27-Monorepo-TypeScript.md
-│   ├── Day-28-Type-Challenges.md
-│   ├── Day-29-Mock-Interview.md
-│   └── Day-30-Revision.md
-├── Interview-Prep/
-│   └── TypeScript-Interview-Questions.md
-└── Cheatsheets/
-    └── TypeScript-Cheatsheet.md
-```
+[← Back to Main](../README.md)
+
+**Week 1 — Type System**
+- [Day 01 — TypeScript Fundamentals](Week-1-Type-System/Day-01-TypeScript-Fundamentals.md)
+- [Day 03 — Generics Deep Dive](Week-1-Type-System/Day-03-Generics-Deep-Dive.md)
+- [Day 05 — Utility Types](Week-1-Type-System/Day-05-Utility-Types.md)
+- [Day 07 — Conditional Types](Week-1-Type-System/Day-07-Conditional-Types.md)
+
+**Week 2 — Advanced Types**
+- [Day 09 — Type Guards & Narrowing](Week-2-Advanced-Types/Day-09-Type-Guards-Narrowing.md)
+
+**Week 3 — Runtime & Tooling**
+- [Day 15 — Decorators v5](Week-3-Runtime-Tooling/Day-15-Decorators-v5.md)
+
+**Week 4 — Architecture & Interview**
+- [Day 22 — Design Patterns in TS](Week-4-Architecture-Interview/Day-22-Design-Patterns-TS.md)
+
+**Interview & Reference**
+- [TypeScript Interview Questions](Interview-Prep/TypeScript-Interview-Questions.md)
+- [TypeScript Cheatsheet](Cheatsheets/TypeScript-Cheatsheet.md)
 
 ## 🎯 Key Learning Outcomes
 

@@ -11,6 +11,50 @@
 | Week 3 | Modern React (2026) | Day 15-21 | ⬜ Not Started |
 | Week 4 | Senior Level + Architecture | Day 22-30 | ⬜ Not Started |
 
+## 📁 File Navigation
+
+[← Back to Main](../../README.md)
+
+**Week 1 — Foundations**
+- [Day 01 — React Fundamentals](week-1-foundations/day-01/README.md)
+- [Day 02 — JSX & Rendering](week-1-foundations/day-02/README.md)
+- [Day 03 — Components Deep Dive](week-1-foundations/day-03/README.md)
+- [Day 04 — State & Lifecycle](week-1-foundations/day-04/README.md)
+- [Day 05 — useEffect Mastery](week-1-foundations/day-05/README.md)
+- [Day 06 — Hooks Deep Dive](week-1-foundations/day-06/README.md)
+- [Day 07 — Mini Project](week-1-foundations/day-07/README.md)
+
+**Week 2 — Advanced**
+- [Day 08 — Rendering Behavior](week-2-advanced/day-08/README.md)
+- [Day 09 — Performance](week-2-advanced/day-09/README.md)
+- [Day 10 — Error Handling](week-2-advanced/day-10/README.md)
+- [Day 11 — Context API](week-2-advanced/day-11/README.md)
+- [Day 12 — State Management](week-2-advanced/day-12/README.md)
+- [Day 13 — Routing](week-2-advanced/day-13/README.md)
+- [Day 14 — Testing](week-2-advanced/day-14/README.md)
+
+**Week 3 — Modern React**
+- [Day 15 — TypeScript + React](week-3-modern/day-15/README.md)
+- [Day 16 — Forms](week-3-modern/day-16/README.md)
+- [Day 17 — API Layer](week-3-modern/day-17/README.md)
+- [Day 18 — React Server Components](week-3-modern/day-18/README.md)
+- [Day 19 — Next.js](week-3-modern/day-19/README.md)
+- [Day 20 — Auth & Security](week-3-modern/day-20/README.md)
+- [Day 21 — Micro Frontend](week-3-modern/day-21/README.md)
+
+**Week 4 — Senior Level**
+- [Day 22 — Large Scale Architecture](week-4-senior/day-22/README.md)
+- [Day 23 — Performance at Scale](week-4-senior/day-23/README.md)
+- [Day 24 — Accessibility](week-4-senior/day-24/README.md)
+- [Day 25 — Animations](week-4-senior/day-25/README.md)
+- [Day 26 — React Native](week-4-senior/day-26/README.md)
+- [Day 27 — AI + React](week-4-senior/day-27/README.md)
+- [Day 28 — System Design](week-4-senior/day-28/README.md)
+- [Day 29 — Interview Questions](week-4-senior/day-29/README.md)
+- [Day 30 — Mock Interview](week-4-senior/day-30/README.md)
+
+---
+
 ## 📁 Folder Structure
 
 ```

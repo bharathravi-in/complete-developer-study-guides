@@ -104,6 +104,49 @@ pip install uv poetry
 
 ---
 
+## 📁 File Navigation
+
+[← Back to Main](../README.md)
+
+**Week 1 — Core Foundations**
+- [Day 01 — Setup & Basics](week1_foundations/day01_setup/README.md)
+- [Day 02 — Data Types](week1_foundations/day02_datatypes/README.md)
+- [Day 03 — Control Flow](week1_foundations/day03_controlflow/README.md)
+- [Day 04 — Functions](week1_foundations/day04_functions/README.md)
+- [Day 05 — Data Structures](week1_foundations/day05_datastructures/README.md)
+- [Day 06 — Error Handling](week1_foundations/day06_errorhandling/README.md)
+- [Day 07 — Modules](week1_foundations/day07_modules/README.md)
+
+**Week 2 — Intermediate**
+- [Day 08 — OOP Basics](week2_intermediate/day08_oop_basics/README.md)
+- [Day 09 — OOP Advanced](week2_intermediate/day09_oop_advanced/README.md)
+- [Day 10 — Decorators](week2_intermediate/day10_decorators/README.md)
+- [Day 11 — Generators](week2_intermediate/day11_generators/README.md)
+- [Day 12 — File Handling](week2_intermediate/day12_filehandling/README.md)
+- [Day 13 — Type Hints](week2_intermediate/day13_typehints/README.md)
+- [Day 14 — Testing](week2_intermediate/day14_testing/README.md)
+
+**Week 3 — Advanced**
+- [Day 15 — Memory Management](week3_advanced/day15_memory/README.md)
+- [Day 16 — Multithreading](week3_advanced/day16_multithreading/README.md)
+- [Day 17 — Async](week3_advanced/day17_async/README.md)
+- [Day 18 — DSA in Python](week3_advanced/day18_dsa/README.md)
+- [Day 20 — Pythonic Patterns](week3_advanced/day20_pythonic/README.md)
+- [Day 21 — Design Patterns](week3_advanced/day21_patterns/README.md)
+
+**Week 4 — Backend & AI**
+- [Day 22 — FastAPI](week4_backend_ai/day22_fastapi/README.md)
+- [Day 23 — Database](week4_backend_ai/day23_database/README.md)
+- [Day 24 — REST Practices](week4_backend_ai/day24_rest_practices/README.md)
+- [Day 25 — Docker](week4_backend_ai/day25_docker/README.md)
+- [Day 26 — Python for AI](week4_backend_ai/day26_python_ai/README.md)
+- [Day 27 — System Design](week4_backend_ai/day27_system_design/README.md)
+- [Day 28 — Final Project](week4_backend_ai/day28_final_project/README.md)
+- [Day 29 — Interview (Beginner)](week4_backend_ai/day29_interview_beginner/README.md)
+- [Day 30 — Interview (Advanced)](week4_backend_ai/day30_interview_advanced/README.md)
+
+---
+
 ## 📁 Workspace Structure
 
 ```

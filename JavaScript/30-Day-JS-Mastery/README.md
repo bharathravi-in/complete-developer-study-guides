@@ -1,5 +1,7 @@
 # 🚀 30-Day JavaScript Mastery Plan
 
+[← Back to Main](../../README.md)
+
 A comprehensive JavaScript study plan for senior-level interview preparation.
 
 ---

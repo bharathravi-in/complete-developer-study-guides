@@ -11,50 +11,22 @@
 | **Week 3** | Distributed Data Patterns | Days 15–21 |
 | **Week 4** | Real-World Architecture & Interview Prep | Days 22–30 |
 
-## 📁 Folder Structure
+## 📁 File Navigation
 
-```
-Database-Scaling/
-├── README.md
-├── Week-1-Replication/
-│   ├── Day-01-Replication-Fundamentals.md
-│   ├── Day-02-Primary-Replica-Setup.md
-│   ├── Day-03-Synchronous-vs-Async.md
-│   ├── Day-04-Failover-HA.md
-│   ├── Day-05-Read-Replicas.md
-│   ├── Day-06-Multi-Master-Replication.md
-│   └── Day-07-Conflict-Resolution.md
-├── Week-2-Sharding/
-│   ├── Day-08-Partitioning-Fundamentals.md
-│   ├── Day-09-Horizontal-vs-Vertical.md
-│   ├── Day-10-Sharding-Strategies.md
-│   ├── Day-11-Consistent-Hashing.md
-│   ├── Day-12-Shard-Key-Selection.md
-│   ├── Day-13-Cross-Shard-Queries.md
-│   └── Day-14-Resharding-Rebalancing.md
-├── Week-3-Distributed-Patterns/
-│   ├── Day-15-CAP-Theorem.md
-│   ├── Day-16-Consistency-Models.md
-│   ├── Day-17-Distributed-Transactions.md
-│   ├── Day-18-CQRS-Event-Sourcing.md
-│   ├── Day-19-Connection-Pooling.md
-│   ├── Day-20-Caching-Strategies.md
-│   └── Day-21-Time-Series-Data.md
-├── Week-4-Architecture-Interview/
-│   ├── Day-22-PostgreSQL-Scaling.md
-│   ├── Day-23-MySQL-Scaling.md
-│   ├── Day-24-MongoDB-Sharding.md
-│   ├── Day-25-NewSQL-CockroachDB.md
-│   ├── Day-26-Cloud-Managed-DBs.md
-│   ├── Day-27-System-Design-Scenarios.md
-│   ├── Day-28-Migration-Strategies.md
-│   ├── Day-29-Mock-Interview.md
-│   └── Day-30-Revision.md
-├── Interview-Prep/
-│   └── Database-Scaling-Interview-Questions.md
-└── Cheatsheets/
-    └── Database-Scaling-Cheatsheet.md
-```
+[← Back to Main](../README.md)
+
+**Week 1 — Replication**
+- [Day 01 — Replication Fundamentals](Week-1-Replication/Day-01-Replication-Fundamentals.md)
+
+**Week 2 — Sharding**
+- [Day 10 — Sharding Strategies](Week-2-Sharding/Day-10-Sharding-Strategies.md)
+
+**Week 3 — Distributed Patterns**
+- [Day 15 — CAP Theorem](Week-3-Distributed-Patterns/Day-15-CAP-Theorem.md)
+
+**Interview & Reference**
+- [Database Scaling Interview Questions](Interview-Prep/Database-Scaling-Interview-Questions.md)
+- [Database Scaling Cheatsheet](Cheatsheets/Database-Scaling-Cheatsheet.md)
 
 ## 📊 Progress Tracker
 
