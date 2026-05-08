@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Tracker</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #c9d1d9;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --accent-hover: #79c0ff;
+      --success: #3fb950;
+      --warning: #d29922;
+      --danger: #f85149;
+      --purple: #bc8cff;
+      --sidebar-width: 280px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      overflow: hidden;
+    }
+    
+    /* Layout */
+    .app { display: flex; height: 100vh; }
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .header {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--surface);
+    }
+    .content { flex: 1; overflow-y: auto; padding: 24px; }
+    
+    /* Sidebar */
+    .sidebar-header {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 18px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sidebar-nav { flex: 1; overflow-y: auto; padding: 8px; }
+    .nav-section {
+      margin-bottom: 4px;
+    }
+    .nav-section-header {
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 6px;
+    }
+    .nav-section-header:hover { background: var(--border); }
+    .nav-section-header .count {
+      background: var(--border);
+      padding: 2px 6px;
+      border-radius: 10px;
+      font-size: 11px;
+    }
+    .nav-items { display: none; padding-left: 8px; }
+    .nav-items.open { display: block; }
+    .nav-item {
+      padding: 6px 12px;
+      font-size: 13px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .nav-item:hover { background: var(--border); color: var(--text); }
+    .nav-item.active { background: rgba(88, 166, 255, 0.1); color: var(--accent); }
+    .nav-item .check { color: var(--success); font-size: 14px; }
+    
+    /* Header controls */
+    .search-box {
+      flex: 1;
+      max-width: 400px;
+      position: relative;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 8px 12px 8px 36px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+    }
+    .search-box input:focus { border-color: var(--accent); }
+    .search-box::before {
+      content: '🔍';
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+    }
+    
+    .view-tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--bg);
+      padding: 4px;
+      border-radius: 8px;
+    }
+    .view-tab {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .view-tab.active { background: var(--surface); color: var(--accent); }
+    .view-tab:hover { color: var(--text); }
+    
+    /* Stats bar */
+    .stats-bar {
+      display: flex;
+      gap: 24px;
+      padding: 12px 24px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      font-size: 13px;
+    }
+    .stat { display: flex; align-items: center; gap: 6px; }
+    .stat-value { font-weight: 600; color: var(--accent); }
+    .stat-label { color: var(--text-muted); }
+    
+    /* Progress bar */
+    .progress-bar {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-left: auto;
+      width: 200px;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--success), var(--accent));
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+    
+    /* Dashboard */
+    .dashboard { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+    .topic-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .topic-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .topic-card h3 { margin-bottom: 8px; font-size: 16px; }
+    .topic-card .topic-stats { color: var(--text-muted); font-size: 13px; margin-bottom: 12px; }
+    .topic-card .topic-progress {
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .topic-card .topic-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--success), var(--accent));
+      border-radius: 3px;
+    }
+    .topic-card .topic-pct { 
+      text-align: right; font-size: 12px; color: var(--success); 
+      margin-top: 4px; font-weight: 600; 
+    }
+    
+    /* Markdown content */
+    .md-content {
+      max-width: 900px;
+      line-height: 1.7;
+    }
+    .md-content h1 { font-size: 28px; margin-bottom: 16px; color: var(--text); border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    .md-content h2 { font-size: 22px; margin: 24px 0 12px; color: var(--accent); }
+    .md-content h3 { font-size: 18px; margin: 20px 0 8px; color: var(--purple); }
+    .md-content h4 { font-size: 15px; margin: 16px 0 6px; }
+    .md-content p { margin-bottom: 12px; }
+    .md-content ul, .md-content ol { margin: 8px 0 16px 24px; }
+    .md-content li { margin-bottom: 4px; }
+    .md-content code {
+      background: var(--bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+    .md-content pre {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      overflow-x: auto;
+      margin: 12px 0;
+    }
+    .md-content pre code { padding: 0; background: none; }
+    .md-content table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+    .md-content th, .md-content td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
+    .md-content th { background: var(--surface); font-weight: 600; }
+    .md-content blockquote { border-left: 3px solid var(--accent); padding-left: 16px; color: var(--text-muted); margin: 12px 0; }
+    .md-content a { color: var(--accent); text-decoration: none; }
+    .md-content a:hover { text-decoration: underline; }
+    .md-content img { max-width: 100%; border-radius: 8px; }
+    .md-content hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+    
+    /* Article header */
+    .article-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-header .back-btn {
+      padding: 6px 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .article-header .back-btn:hover { border-color: var(--accent); }
+    .mark-complete-btn {
+      margin-left: auto;
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .mark-complete-btn.completed {
+      background: rgba(63, 185, 80, 0.15);
+      color: var(--success);
+    }
+    .mark-complete-btn.pending {
+      background: var(--accent);
+      color: #fff;
+    }
+    
+    /* Quiz mode */
+    .quiz-container { max-width: 700px; }
+    .quiz-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .quiz-card .question { font-size: 16px; font-weight: 500; margin-bottom: 16px; }
+    .quiz-card .answer {
+      display: none;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .quiz-card .answer.show { display: block; }
+    .quiz-card .reveal-btn {
+      padding: 8px 16px;
+      background: var(--accent);
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .quiz-card .reveal-btn:hover { background: var(--accent-hover); }
+    .quiz-controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .quiz-controls select {
+      padding: 8px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 13px;
+    }
+    .quiz-score {
+      margin-left: auto;
+      font-size: 14px;
+      color: var(--success);
+      font-weight: 600;
+    }
+    
+    /* Schedule view */
+    .schedule { max-width: 800px; }
+    .schedule-day {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .schedule-day .day-num {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      border-radius: 50%;
+      font-weight: 600;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .schedule-day .day-num.today { background: var(--accent); color: #fff; }
+    .schedule-day .day-num.done { background: var(--success); color: #fff; }
+    .schedule-day .day-content { flex: 1; }
+    .schedule-day .day-title { font-weight: 500; margin-bottom: 2px; }
+    .schedule-day .day-topic { font-size: 12px; color: var(--text-muted); }
+    
+    /* Search results */
+    .search-results { max-width: 800px; }
+    .search-result {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .search-result:hover { border-color: var(--accent); }
+    .search-result .result-title { font-weight: 500; margin-bottom: 4px; }
+    .search-result .result-path { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+    .search-result .result-snippet { font-size: 13px; color: var(--text-muted); }
+    .search-result mark { background: rgba(88, 166, 255, 0.3); color: var(--text); border-radius: 2px; }
+    
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+    .empty-state .icon { font-size: 48px; margin-bottom: 16px; }
+    .empty-state h3 { margin-bottom: 8px; color: var(--text); }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+    
+    /* Load data notice */
+    .load-notice {
+      text-align: center;
+      padding: 40px;
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      margin: 20px;
+    }
+    .load-notice code {
+      background: var(--bg);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .load-notice .or { margin: 16px 0; color: var(--text-muted); }
+    .load-notice button {
+      padding: 10px 20px;
+      background: var(--accent);
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">📚 Study Tracker</div>
+      <nav class="sidebar-nav" id="sidebarNav"></nav>
+    </aside>
+    
+    <!-- Main -->
+    <div class="main">
+      <header class="header">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search topics, content..." />
+        </div>
+        <div class="view-tabs">
+          <button class="view-tab active" data-view="dashboard">Dashboard</button>
+          <button class="view-tab" data-view="schedule">Schedule</button>
+          <button class="view-tab" data-view="quiz">Quiz</button>
+        </div>
+      </header>
+      
+      <div class="stats-bar" id="statsBar"></div>
+      
+      <div class="content" id="mainContent">
+        <div class="load-notice" id="loadNotice">
+          <div class="icon">📂</div>
+          <h3>Load Study Data</h3>
+          <p>Run the build script first to generate data:</p>
+          <code>cd study-tracker && node build.js</code>
+          <div class="or">— or —</div>
+          <p>Load the generated data.json file:</p>
+          <button onclick="loadFromFile()">Load data.json</button>
+          <input type="file" id="fileInput" accept=".json" style="display:none" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==================== STATE ====================
+    let studyData = null;
+    let progress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+    let currentView = 'dashboard';
+    let currentArticle = null;
+    let searchQuery = '';
+    let openSections = JSON.parse(localStorage.getItem('openSections') || '{}');
+
+    // ==================== INIT ====================
+    async function init() {
+      // Try loading data.json from same directory
+      try {
+        const res = await fetch('data.json');
+        if (res.ok) {
+          studyData = await res.json();
+          render();
+          return;
+        }
+      } catch (e) {}
+      
+      // Show load notice
+      document.getElementById('loadNotice').style.display = 'block';
+    }
+
+    function loadFromFile() {
+      const input = document.getElementById('fileInput');
+      input.click();
+      input.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          try {
+            studyData = JSON.parse(ev.target.result);
+            render();
+          } catch (err) {
+            alert('Invalid JSON file');
+          }
+        };
+        reader.readAsText(file);
+      };
+    }
+
+    // ==================== PROGRESS ====================
+    function isCompleted(fileId) {
+      return progress[fileId] === true;
+    }
+    function toggleComplete(fileId) {
+      if (progress[fileId]) {
+        delete progress[fileId];
+      } else {
+        progress[fileId] = true;
+      }
+      localStorage.setItem('studyProgress', JSON.stringify(progress));
+      render();
+    }
+    function getTopicProgress(topic) {
+      const files = studyData.files.filter(f => f.topic === topic);
+      if (files.length === 0) return 0;
+      const completed = files.filter(f => isCompleted(f.id)).length;
+      return Math.round((completed / files.length) * 100);
+    }
+    function getOverallProgress() {
+      if (!studyData) return 0;
+      const completed = studyData.files.filter(f => isCompleted(f.id)).length;
+      return Math.round((completed / studyData.files.length) * 100);
+    }
+
+    // ==================== RENDER ====================
+    function render() {
+      if (!studyData) return;
+      document.getElementById('loadNotice').style.display = 'none';
+      renderSidebar();
+      renderStatsBar();
+      renderContent();
+    }
+
+    function renderSidebar() {
+      const nav = document.getElementById('sidebarNav');
+      const topics = Object.keys(studyData.topics).sort();
+      
+      nav.innerHTML = topics.map(topic => {
+        const files = studyData.files.filter(f => f.topic === topic);
+        const isOpen = openSections[topic];
+        const pct = getTopicProgress(topic);
+        
+        return `
+          <div class="nav-section">
+            <div class="nav-section-header" onclick="toggleSection('${topic}')">
+              <span>${topic}</span>
+              <span class="count">${pct}%</span>
+            </div>
+            <div class="nav-items ${isOpen ? 'open' : ''}">
+              ${files.map(f => `
+                <div class="nav-item ${currentArticle === f.id ? 'active' : ''}" 
+                     onclick="openArticle('${f.id}')">
+                  ${isCompleted(f.id) ? '<span class="check">✓</span>' : ''}
+                  <span>${f.day ? 'Day ' + f.day + ': ' : ''}${truncate(f.title, 30)}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderStatsBar() {
+      const bar = document.getElementById('statsBar');
+      const completed = studyData.files.filter(f => isCompleted(f.id)).length;
+      const pct = getOverallProgress();
+      
+      bar.innerHTML = `
+        <div class="stat">
+          <span class="stat-value">${studyData.stats.totalTopics}</span>
+          <span class="stat-label">Topics</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">${studyData.stats.totalFiles}</span>
+          <span class="stat-label">Lessons</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">${completed}/${studyData.stats.totalFiles}</span>
+          <span class="stat-label">Completed</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">${studyData.stats.totalQuestions}</span>
+          <span class="stat-label">Questions</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: ${pct}%"></div>
+        </div>
+        <span class="stat-value">${pct}%</span>
+      `;
+    }
+
+    function renderContent() {
+      const el = document.getElementById('mainContent');
+      
+      if (searchQuery) {
+        renderSearch(el);
+        return;
+      }
+      
+      switch (currentView) {
+        case 'dashboard': renderDashboard(el); break;
+        case 'schedule': renderSchedule(el); break;
+        case 'quiz': renderQuiz(el); break;
+        case 'article': renderArticle(el); break;
+      }
+    }
+
+    function renderDashboard(el) {
+      const topics = Object.keys(studyData.topics).sort();
+      el.innerHTML = `
+        <div class="dashboard">
+          ${topics.map(topic => {
+            const info = studyData.topics[topic];
+            const pct = getTopicProgress(topic);
+            return `
+              <div class="topic-card" onclick="openTopic('${topic}')">
+                <h3>${topic}</h3>
+                <div class="topic-stats">
+                  ${info.totalFiles} lessons • ${info.totalQuestions} questions
+                </div>
+                <div class="topic-progress">
+                  <div class="topic-progress-fill" style="width: ${pct}%"></div>
+                </div>
+                <div class="topic-pct">${pct}% complete</div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    function renderSchedule(el) {
+      // Create a daily schedule from all files sorted by topic & day
+      const allDays = studyData.files.filter(f => f.day !== null).sort((a, b) => {
+        if (a.topic !== b.topic) return a.topic.localeCompare(b.topic);
+        return a.day - b.day;
+      });
+      
+      // Group by topic
+      const grouped = {};
+      allDays.forEach(f => {
+        if (!grouped[f.topic]) grouped[f.topic] = [];
+        grouped[f.topic].push(f);
+      });
+      
+      el.innerHTML = `
+        <div class="schedule">
+          <h2 style="margin-bottom: 20px;">Daily Schedule</h2>
+          ${Object.entries(grouped).map(([topic, files]) => `
+            <h3 style="margin: 20px 0 12px; color: var(--purple);">${topic}</h3>
+            ${files.map(f => `
+              <div class="schedule-day" onclick="openArticle('${f.id}')">
+                <div class="day-num ${isCompleted(f.id) ? 'done' : ''}">
+                  ${isCompleted(f.id) ? '✓' : f.day}
+                </div>
+                <div class="day-content">
+                  <div class="day-title">${f.title}</div>
+                  <div class="day-topic">${f.topic} • Week ${f.week || '?'}</div>
+                </div>
+              </div>
+            `).join('')}
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function renderQuiz(el) {
+      const topics = Object.keys(studyData.topics).sort();
+      const allQuestions = studyData.files.flatMap(f => 
+        f.questions.map(q => ({ ...q, topic: f.topic, file: f.title }))
+      );
+      
+      // Filter by selected topic
+      const selectedTopic = localStorage.getItem('quizTopic') || 'all';
+      const filtered = selectedTopic === 'all' 
+        ? allQuestions 
+        : allQuestions.filter(q => q.topic === selectedTopic);
+      
+      // Shuffle and take 10
+      const shuffled = [...filtered].sort(() => Math.random() - 0.5).slice(0, 10);
+      
+      el.innerHTML = `
+        <div class="quiz-container">
+          <div class="quiz-controls">
+            <select onchange="setQuizTopic(this.value)">
+              <option value="all" ${selectedTopic === 'all' ? 'selected' : ''}>All Topics</option>
+              ${topics.map(t => `<option value="${t}" ${selectedTopic === t ? 'selected' : ''}>${t}</option>`).join('')}
+            </select>
+            <button class="view-tab" onclick="renderQuiz(document.getElementById('mainContent'))">🔄 New Questions</button>
+            <div class="quiz-score">${filtered.length} questions available</div>
+          </div>
+          ${shuffled.length === 0 ? `
+            <div class="empty-state">
+              <div class="icon">❓</div>
+              <h3>No questions found</h3>
+              <p>Select a different topic or ensure your study files have interview questions.</p>
+            </div>
+          ` : shuffled.map((q, i) => `
+            <div class="quiz-card">
+              <div class="question">${i + 1}. ${escapeHtml(q.question)}</div>
+              <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
+                ${q.topic} — ${truncate(q.file, 40)}
+              </div>
+              <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('show'); this.textContent = this.textContent === 'Show Answer' ? 'Hide Answer' : 'Show Answer'">Show Answer</button>
+              <div class="answer md-content">${marked.parse(q.answer || 'No answer provided.')}</div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function renderArticle(el) {
+      const file = studyData.files.find(f => f.id === currentArticle);
+      if (!file) {
+        currentView = 'dashboard';
+        renderDashboard(el);
+        return;
+      }
+      
+      const completed = isCompleted(file.id);
+      el.innerHTML = `
+        <div class="article-header">
+          <button class="back-btn" onclick="goBack()">← Back</button>
+          <span style="color: var(--text-muted); font-size: 13px;">${file.topic} • ${file.path}</span>
+          <button class="mark-complete-btn ${completed ? 'completed' : 'pending'}" 
+                  onclick="toggleComplete('${file.id}')">
+            ${completed ? '✓ Completed' : 'Mark Complete'}
+          </button>
+        </div>
+        <div class="md-content">${marked.parse(file.content)}</div>
+      `;
+      el.scrollTop = 0;
+    }
+
+    function renderSearch(el) {
+      const query = searchQuery.toLowerCase();
+      const results = studyData.files.filter(f => {
+        return f.title.toLowerCase().includes(query) ||
+               f.content.toLowerCase().includes(query) ||
+               f.topic.toLowerCase().includes(query);
+      }).slice(0, 30);
+      
+      el.innerHTML = `
+        <div class="search-results">
+          <h3 style="margin-bottom: 16px;">Search results for "${escapeHtml(searchQuery)}" (${results.length})</h3>
+          ${results.length === 0 ? `
+            <div class="empty-state">
+              <div class="icon">🔍</div>
+              <h3>No results found</h3>
+            </div>
+          ` : results.map(f => {
+            const idx = f.content.toLowerCase().indexOf(query);
+            const snippet = idx >= 0 
+              ? '...' + f.content.substring(Math.max(0, idx - 40), idx + 100).replace(/</g, '&lt;') + '...'
+              : '';
+            const highlighted = snippet.replace(new RegExp(escapeRegex(query), 'gi'), '<mark>$&</mark>');
+            return `
+              <div class="search-result" onclick="openArticle('${f.id}')">
+                <div class="result-title">${f.title}</div>
+                <div class="result-path">${f.topic} — ${f.path}</div>
+                <div class="result-snippet">${highlighted}</div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    // ==================== ACTIONS ====================
+    function toggleSection(topic) {
+      openSections[topic] = !openSections[topic];
+      localStorage.setItem('openSections', JSON.stringify(openSections));
+      renderSidebar();
+    }
+
+    function openTopic(topic) {
+      openSections[topic] = true;
+      localStorage.setItem('openSections', JSON.stringify(openSections));
+      const files = studyData.files.filter(f => f.topic === topic);
+      if (files.length > 0) {
+        openArticle(files[0].id);
+      }
+    }
+
+    function openArticle(id) {
+      currentArticle = id;
+      currentView = 'article';
+      searchQuery = '';
+      document.getElementById('searchInput').value = '';
+      render();
+    }
+
+    function goBack() {
+      currentArticle = null;
+      currentView = 'dashboard';
+      render();
+    }
+
+    function setQuizTopic(topic) {
+      localStorage.setItem('quizTopic', topic);
+      renderQuiz(document.getElementById('mainContent'));
+    }
+
+    // ==================== EVENTS ====================
+    document.querySelectorAll('.view-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentView = tab.dataset.view;
+        currentArticle = null;
+        searchQuery = '';
+        document.getElementById('searchInput').value = '';
+        renderContent();
+      });
+    });
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim();
+      if (searchQuery.length >= 2) {
+        renderContent();
+      } else if (searchQuery.length === 0) {
+        renderContent();
+      }
+    });
+
+    // ==================== UTILS ====================
+    function truncate(str, len) {
+      return str.length > len ? str.substring(0, len) + '...' : str;
+    }
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+    function escapeRegex(str) {
+      return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    // Start
+    init();
+  </script>
+</body>
+</html>

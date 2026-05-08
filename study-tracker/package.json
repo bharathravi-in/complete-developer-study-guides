@@ -1,0 +1,10 @@
+{
+  "name": "study-tracker",
+  "version": "1.0.0",
+  "description": "Study progress tracker for all learning materials",
+  "scripts": {
+    "build": "node build.js",
+    "serve": "npx http-server . -p 3000 -o",
+    "start": "node build.js && npx http-server . -p 3000 -o"
+  }
+}
